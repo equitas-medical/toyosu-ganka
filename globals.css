@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* 眼科とよす医院 ― 専門性・信頼性コンセプト */
+  --font-sans: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-navy: var(--navy);
+  --color-teal: var(--teal);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 2.5);
+  --radius-4xl: calc(var(--radius) * 3);
+}
+
+:root {
+  color-scheme: light;
+  /* ── 医療法人 千の樹会 ― 樹木ロゴのグリーン系パレット ── */
+  /* Primary: 深みのあるフォレストグリーン（幹・文字の色／信頼・成長） */
+  --primary: oklch(0.50 0.09 152);
+  --primary-foreground: oklch(1 0 0);
+  /* Secondary: ごく淡いグリーン */
+  --secondary: oklch(0.97 0.02 148);
+  --secondary-foreground: oklch(0.36 0.07 152);
+  /* Accent: 明るい黄緑（若葉の色／やさしさ・活力） */
+  --accent: oklch(0.80 0.14 128);
+  --accent-foreground: oklch(0.30 0.07 150);
+  /* Navy → 深い森の緑（重厚感のあるダークセクション） */
+  --navy: oklch(0.30 0.05 155);
+  /* Highlight: 明るいリーフグリーン */
+  --teal: oklch(0.68 0.13 140);
+  /* Background: ごく淡いグリーンがかった白 */
+  --background: oklch(0.99 0.005 145);
+  --foreground: oklch(0.24 0.02 155);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.02 155);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.02 155);
+  --muted: oklch(0.97 0.012 145);
+  --muted-foreground: oklch(0.51 0.025 150);
+  --border: oklch(0.91 0.018 145);
+  --input: oklch(0.91 0.018 145);
+  --ring: oklch(0.50 0.09 152);
+  --destructive: oklch(0.577 0.245 27.325);
+  --radius: 1rem;
+  --sidebar: oklch(0.97 0.012 145);
+  --sidebar-foreground: oklch(0.24 0.02 155);
+  --sidebar-primary: oklch(0.50 0.09 152);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.97 0.02 148);
+  --sidebar-accent-foreground: oklch(0.36 0.07 152);
+  --sidebar-border: oklch(0.91 0.018 145);
+  --sidebar-ring: oklch(0.50 0.09 152);
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* タップターゲット最小44px (WCAG 2.5.5) */
+  a, button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  /* ナビリンクはインラインでよい */
+  nav a {
+    display: inline-flex;
+  }
+  /* 本文の最大幅と読みやすさ */
+  p, li {
+    max-width: 70ch;
+  }
+  /* モバイルでのフォントサイズ最小値・レスポンシブ調整 */
+  @media (max-width: 640px) {
+    html {
+      font-size: 15px;
+    }
+    /* 小さい画面でも読める見出し */
+    h1 { @apply text-2xl; }
+    h2 { @apply text-xl; }
+    h3 { @apply text-lg; }
+    /* ボタンのレスポンシブ padding */
+    button, a[role="button"] {
+      @apply px-4 py-2.5;
+    }
+    /* セクション padding 調整 */
+    section {
+      @apply px-3.5;
+    }
+  }
+  
+  /* 横スクロール防止 */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* CLS防止: 画像の aspect ratio 固定 */
+  img {
+    @apply max-w-full h-auto;
+  }
+  
+  /* フォーム要素のモバイル最適化 */
+  input, textarea, select {
+    @apply text-base; /* iOS Safari ズーム防止 */
+    @apply min-h-12 px-4 py-2;
+  }
+}
+
+@layer components {
+  /* INP (Interaction to Next Paint) 最適化 */
+  .interactive-btn {
+    @apply transform-gpu transition-all will-change-auto hover:will-change-transform;
+  }
+  
+  /* CLS防止: リザーブド領域 */
+  .reserved-space {
+    @apply aspect-video bg-muted/30;
+  }
+  
+  /* ScrollIntoView パフォーマンス */
+  [data-scroll-into-view] {
+    scroll-behavior: smooth;
+  }
+}
